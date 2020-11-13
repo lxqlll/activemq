@@ -1,0 +1,44 @@
+server:
+  port: 8080
+#数据源的配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://111.230.202.74:3306/activemq?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    #注入数据源的类型   默认的为HikariDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #      filters: log4j,stat
+      max-active: 20
+      min-idle: 5
+      validation-query: select x
+      initial-size: 3
+      max-wait: 5000
+  #      stat-view-servlet:
+  #        login-username: root
+  #        login-password: 123456
+  #        allow:
+  #        deny:
+  #        url-pattern: /druid/*
+  #        enabled: true  #启用数据源监控
+  #redis配置
+  redis:
+    host: 111.230.202.74
+    password: 123456
+    port: 6390
+  activemq:
+    broker-url: failover:(tcp://${brokerIp}:61616,tcp://${brokerIp}:61617,tcp://${brokerIp}:61618)
+    user: admin
+    password: admin
+  jms:
+    pub-sub-domain: false   #false代表队列[默认]  true代表主题
+
+brokerIp: 111.230.202.74
+
+#mybatis的配置
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml  #配置mapper.xml的扫描
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
