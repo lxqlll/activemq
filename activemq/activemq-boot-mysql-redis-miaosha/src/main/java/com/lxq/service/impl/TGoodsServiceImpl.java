@@ -120,7 +120,6 @@ public class TGoodsServiceImpl implements TGoodsService {
         ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
         //查询redis
         String num = operations.get(pid);
-
         if(Integer.valueOf(num)>=0){
             int i = 0;
             sender.sendDirectQueue(pid,userId);
@@ -130,7 +129,5 @@ public class TGoodsServiceImpl implements TGoodsService {
             System.out.println("库存不足");
             return false;
         }
-
-
     }
 }

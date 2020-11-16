@@ -68,6 +68,11 @@ public interface TGoodsService {
      */
     List<TGoods> queryAll(TGoods tGoods);
 
-
+    /**
+     *
+     * @param pid
+     * @param userId
+     * @return
+     */
     boolean secondsKill(String pid, String userId);
 }

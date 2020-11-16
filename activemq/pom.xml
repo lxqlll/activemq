@@ -14,6 +14,7 @@
         <module>activemq-springboot-producer</module>
         <module>activemq-springboot-consumer</module>
         <module>apache-activemq</module>
+        <module>activemq-boot-mysql-redis-miaosha</module>
     </modules>
 
     <parent>

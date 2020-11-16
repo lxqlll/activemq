@@ -1,13 +1,20 @@
 package com.lxq.mq.controller;
 
+import com.lxq.listener.ApplicationInitListener;
 import com.lxq.result.Response;
 import com.lxq.result.Result;
 import com.lxq.result.ResultEnum;
 import com.lxq.service.TGoodsService;
+import com.lxq.utils.SpringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.websocket.server.PathParam;
 import java.util.Map;
 
 /**
@@ -32,7 +39,7 @@ public class ActiveController {
      *                我这里没做多余的逻辑，只看了相关情况的返回结果，有需要的可以自己去实现
      */
     @RequestMapping(value = "secondsKill")
-     public Result secondsKill(String pid, String userId){
+     public Result secondsKill(@PathParam("pid") String pid, @PathParam("userId") String userId){
 
         //for(int i=0; i<100; i++) {
         boolean result = tGoodsService.secondsKill(pid, userId);
@@ -42,12 +49,14 @@ public class ActiveController {
         }else{
             return Response.ok();
         }
-
-
-
-
-
-
-
      }
+
+
+    @RequestMapping(value = "test")
+    public Result test(String pid, String userId){
+        tGoodsService.queryAll(null);
+
+        return Response.error();
+    }
+
 }
