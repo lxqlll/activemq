@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxq.mapper.TGoodsMapper">
+
+    <resultMap id="BaseResultMap" type="com.lxq.entity.TGoods">
+        <!--@Table t_goods-->
+        <result property="goodsId" column="goods_id" jdbcType="OTHER"/>
+        <result property="goodsName" column="goods_name" jdbcType="VARCHAR"/>
+        <result property="shopId" column="shop_id" jdbcType="INTEGER"/>
+        <result property="oriPrice" column="ori_price" jdbcType="NUMERIC"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="brief" column="brief" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="picture" column="picture" jdbcType="VARCHAR"/>
+        <result property="imgs" column="imgs" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="categoryId" column="category_id" jdbcType="OTHER"/>
+        <result property="soldNum" column="sold_num" jdbcType="INTEGER"/>
+        <result property="totalStocks" column="total_stocks" jdbcType="INTEGER"/>
+        <result property="deliveryMode" column="delivery_mode" jdbcType="OTHER"/>
+        <result property="deliveryTemplateId" column="delivery_template_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="putawayTime" column="putaway_time" jdbcType="TIMESTAMP"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="ismiaosha" column="ismiaosha" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          goods_id, goods_name, shop_id, ori_price, price, brief, content, picture, imgs, status, category_id, sold_num, total_stocks, delivery_mode, delivery_template_id, create_time, update_time, putaway_time, version, ismiaosha
+        from activemq.t_goods
+        where goods_id = #{goodsId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          goods_id, goods_name, shop_id, ori_price, price, brief, content, picture, imgs, status, category_id, sold_num, total_stocks, delivery_mode, delivery_template_id, create_time, update_time, putaway_time, version, ismiaosha
+        from activemq.t_goods
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          goods_id, goods_name, shop_id, ori_price, price, brief, content, picture, imgs, status, category_id, sold_num, total_stocks, delivery_mode, delivery_template_id, create_time, update_time, putaway_time, version, ismiaosha
+        from activemq.t_goods
+        <where>
+            <if test="goodsId != null">
+                and goods_id = #{goodsId}
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and goods_name = #{goodsName}
+            </if>
+            <if test="shopId != null">
+                and shop_id = #{shopId}
+            </if>
+            <if test="oriPrice != null">
+                and ori_price = #{oriPrice}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="brief != null and brief != ''">
+                and brief = #{brief}
+            </if>
+            <if test="content != null and content != ''">
+                and content = #{content}
+            </if>
+            <if test="picture != null and picture != ''">
+                and picture = #{picture}
+            </if>
+            <if test="imgs != null and imgs != ''">
+                and imgs = #{imgs}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="soldNum != null">
+                and sold_num = #{soldNum}
+            </if>
+            <if test="totalStocks != null">
+                and total_stocks = #{totalStocks}
+            </if>
+            <if test="deliveryMode != null">
+                and delivery_mode = #{deliveryMode}
+            </if>
+            <if test="deliveryTemplateId != null">
+                and delivery_template_id = #{deliveryTemplateId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="putawayTime != null">
+                and putaway_time = #{putawayTime}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="ismiaosha != null">
+                and ismiaosha = #{ismiaosha}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="goodsId" useGeneratedKeys="true">
+        insert into activemq.t_goods(goods_name, shop_id, ori_price, price, brief, content, picture, imgs, status, category_id, sold_num, total_stocks, delivery_mode, delivery_template_id, create_time, update_time, putaway_time, version, ismiaosha)
+        values (#{goodsName}, #{shopId}, #{oriPrice}, #{price}, #{brief}, #{content}, #{picture}, #{imgs}, #{status}, #{categoryId}, #{soldNum}, #{totalStocks}, #{deliveryMode}, #{deliveryTemplateId}, #{createTime}, #{updateTime}, #{putawayTime}, #{version}, #{ismiaosha})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update activemq.t_goods
+        <set>
+            <if test="goodsName != null and goodsName != ''">
+                goods_name = #{goodsName},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId},
+            </if>
+            <if test="oriPrice != null">
+                ori_price = #{oriPrice},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="brief != null and brief != ''">
+                brief = #{brief},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="picture != null and picture != ''">
+                picture = #{picture},
+            </if>
+            <if test="imgs != null and imgs != ''">
+                imgs = #{imgs},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="soldNum != null">
+                sold_num = #{soldNum},
+            </if>
+            <if test="totalStocks != null">
+                total_stocks = #{totalStocks},
+            </if>
+            <if test="deliveryMode != null">
+                delivery_mode = #{deliveryMode},
+            </if>
+            <if test="deliveryTemplateId != null">
+                delivery_template_id = #{deliveryTemplateId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="putawayTime != null">
+                putaway_time = #{putawayTime},
+            </if>
+            <if test="version != null">
+                version = #{version},
+            </if>
+            <if test="ismiaosha != null">
+                ismiaosha = #{ismiaosha},
+            </if>
+        </set>
+        where goods_id = #{goodsId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from activemq.t_goods where goods_id = #{goodsId}
+    </delete>
+
+
+
+
+</mapper>
