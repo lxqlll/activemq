@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebApplicationContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,25 +39,18 @@ public class ActiveController {
      * @param userId -用户id，做订单和用户关联使用（比如生成成功秒杀商品的用户订单表）
      *                我这里没做多余的逻辑，只看了相关情况的返回结果，有需要的可以自己去实现
      */
-    @RequestMapping(value = "secondsKill")
-     public Result secondsKill(@PathParam("pid") String pid, @PathParam("userId") String userId){
+    @RequestMapping(value = "secondsKill/{pid}/{userId}")
+     public Result secondsKill(@PathVariable String pid, @PathVariable String userId){
 
         //for(int i=0; i<100; i++) {
         boolean result = tGoodsService.secondsKill(pid, userId);
 
         if(result==false){
-            return Response.error();
+            return Response.error(ResultEnum.ERROR);
         }else{
-            return Response.ok();
+            return Response.ok(ResultEnum.SUCCESS);
         }
      }
 
-
-    @RequestMapping(value = "test")
-    public Result test(String pid, String userId){
-        tGoodsService.queryAll(null);
-
-        return Response.error();
-    }
 
 }

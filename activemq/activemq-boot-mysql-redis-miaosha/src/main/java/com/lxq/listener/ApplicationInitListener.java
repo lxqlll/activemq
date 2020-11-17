@@ -67,7 +67,7 @@ public class ApplicationInitListener implements ApplicationListener<ContextRefre
 
     /**
      * 上面方法不执行，尝试另外一种方式
-     */
+
     @PostConstruct
     public void onApplicationEvent(){
         //得到ValueOperations对象
@@ -90,5 +90,5 @@ public class ApplicationInitListener implements ApplicationListener<ContextRefre
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

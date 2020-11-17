@@ -29,7 +29,7 @@ spring:
     password: 123456
     port: 6390
   activemq:
-    broker-url: failover:(tcp://${brokerIp}:61616,tcp://${brokerIp}:61617,tcp://${brokerIp}:61618)
+    broker-url: tcp://127.0.0.1:61616 # failover:(tcp://${brokerIp}:61616,tcp://${brokerIp}:61617,tcp://${brokerIp}:61618)取消集群云服务器带不动
     user: admin
     password: admin
   jms:
